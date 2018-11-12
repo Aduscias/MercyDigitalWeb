@@ -25,7 +25,7 @@ class Header extends Component {
         }
         return (
             <div>
-                <Row type="flex" justify="center" align="middle">
+                <Row type="flex" justify="center" align="middle" >
                     <Col span={8}> <img alt="Title" src="./media/green-tear-md.png" style={{width: 100}}/> </Col>
                     <Col span={8}>How about sharing with those in need? Now in BlockChain</Col>
                     <Col span={8}>
