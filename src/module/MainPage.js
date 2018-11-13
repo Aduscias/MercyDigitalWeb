@@ -4,8 +4,8 @@
 import '../App.css';
 import React, {Component} from 'react';
 import {Row, Col, Button, Card} from 'antd';
+import Header from '../module/Header'
 let ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-
 
 class CardOrg extends Component {
     constructor(props) {
@@ -45,11 +45,12 @@ class CardOrg extends Component {
 class MainPage extends Component {
     render() {
             return (
+
                 <div>
                     <ReactCSSTransitionGroup transitionName="example"
                                              transitionAppear={true} transitionAppearTimeout={500}
                                              transitionEnter={false} transitionLeave={false}>
-
+                        <Header />
                         <CardOrg />
                     </ReactCSSTransitionGroup>
                 </div>

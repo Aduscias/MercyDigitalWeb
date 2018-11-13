@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Row, Col, Button, Input, Icon} from 'antd';
+import Header from '../module/Header'
 
 class Authorize extends Component {
     constructor(props) {
@@ -50,6 +51,7 @@ class Authorize extends Component {
         }
         return (
             <div>
+                <Header />
                 <Row type="flex" justify="center" align="middle">
                     <Col span={12} offset={0}>
                         <Input.Group>
