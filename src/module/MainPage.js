@@ -24,8 +24,8 @@ class CardOrg extends Component {
     render() {
         let renderOrg = this.state.org.map(function (paramOrg) {
             return (
-                <Col span={8} id={paramOrg.id}>
-                    <Card title={paramOrg.title} extra={<a href="#">Подробнее</a>}>
+                <Col span={8} id={paramOrg.id} key={paramOrg.id}>
+                    <Card title={paramOrg.title} key={paramOrg.id} extra={<a href="#">Подробнее</a>}>
                         <p>{paramOrg.description}</p>
                     </Card>
                 </Col>

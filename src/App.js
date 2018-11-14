@@ -3,7 +3,7 @@
 //import ReactDOM from "react-dom";
 import './App.css';
 import React, {Component} from 'react';
-import { Switch, Route,Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Header from './module/Header'
 import MainPage from './module/MainPage'
@@ -42,5 +42,3 @@ class Main extends Component {
 }
 
 export default AppRoute;
-
-
