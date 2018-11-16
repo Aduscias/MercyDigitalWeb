@@ -9,11 +9,11 @@ class ApiLib extends Component {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(props)
     };
-    const link = "mercy.digital:7080/Mercy/createAccount";
+    const link = "https://mercy.digital:8443/Mercy/createAccount";
     fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
-      return (response.ok ? response.data : response.reason)
+      return (response.ok ? response.result : response.reason)
     })
   }
 
@@ -26,7 +26,7 @@ class ApiLib extends Component {
           password: password
         })
     };
-    const link = "mercy.digital:7080/Mercy/"
+    const link = "https://mercy.digital:8443/Mercy/"
     fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
@@ -40,7 +40,7 @@ class ApiLib extends Component {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(props)
     };
-    const link = "mercy.digital:7080/Mercy/"
+    const link = "https://mercy.digital:8443/Mercy/"
     fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
@@ -54,7 +54,7 @@ class ApiLib extends Component {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(props)
     };
-    const link = "mercy.digital:7080/Mercy/"
+    const link = "https://mercy.digital:8443/Mercy/"
     fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
@@ -68,11 +68,27 @@ class ApiLib extends Component {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(props)
     };
-    const link = "mercy.digital:7080/Mercy/getHistory"
+    const link = "https://mercy.digital:8443/Mercy/getHistory"
     fetch(link, requestOptions)
     .then(response => response.json())
-    .then(function(response) {
-      return (response.ok ? response.data : response.reason)
+    .then(response => response.result)
+    .then(function(result) {
+      var i;
+      var res = [];
+      for (i=0; i < result.length; i++) {
+        try {
+          /* for tranfers */
+          res.push({'description': result[i].description,
+                    'memo': result[i].op[1].memo,
+                    'amount': result[i].op[1].amount});
+        } catch(e) {
+          /* for other stuff */
+          res.push({'description': result[i].description,
+                    'memo': result[i].op[1].options.memo_key,
+                    'amount': result[i].op[1].fee});
+        }
+      };
+      return(res);
     })
   }
 
@@ -82,7 +98,7 @@ class ApiLib extends Component {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(props)
     };
-    const link = "mercy.digital:7080/Mercy/"
+    const link = "https://mercy.digital:8443/Mercy/"
     fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
@@ -96,7 +112,7 @@ class ApiLib extends Component {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(props)
     };
-    const link = "mercy.digital:7080/Mercy/"
+    const link = "https://mercy.digital:8443/Mercy/"
     fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
@@ -110,7 +126,7 @@ class ApiLib extends Component {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(props)
     };
-    const link = "mercy.digital:7080/Mercy/"
+    const link = "https://mercy.digital:8443/Mercy/"
     fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
