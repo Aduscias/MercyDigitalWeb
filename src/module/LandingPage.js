@@ -1,18 +1,23 @@
 import React, {Component} from 'react';
 import {Layout, Menu, Breadcrumb, Anchor} from 'antd';
 import {Row, Col, Button, Input, Icon} from 'antd';
-import ScrollableAnchor from 'react-scrollable-anchor'
+import ScrollableAnchor from 'react-scrollable-anchor';
+import {Redirect} from 'react-router';
+import {Link} from 'react-router-dom';
 const {Header, Content, Footer} = Layout;
-const {Link} = Anchor;
+//const {Link} = Anchor;
+
 
 //console.log(window.location.hash);
 window.addEventListener("hashchange", function(e){
-    //console.log('hashchange1', window.location.hash)
-    if (window.location.hash!=='#section1') {
-        document.getElementById("auth").style.display = "none";
+    //alert(window.location.hash);
+
+
+    if (window.location.hash==='#section1' || window.location.hash==='') {
+        document.getElementById("auth").style.display = "";
     }
     else {
-        document.getElementById("auth").style.display = "";
+        document.getElementById("auth").style.display = "none";
     }
 });
 
@@ -54,6 +59,10 @@ class LandingPage extends Component {
         const {password} = this.state;
         const suffix = userName ? <Icon type="close-circle" onClick={this.emitEmpty}/> : null;
         const suffixT = password ? <Icon type="close-circle" onClick={this.emitEmptyT}/> : null;
+        if (this.state.redirect) {
+            return <Redirect push to="/Main"/>;
+            // return <Link to='/Personal'></Link>
+        }
         return (
             <Layout>
                 <Header style={{position: 'fixed', zIndex: 1, width: '100%'}}>
@@ -61,11 +70,13 @@ class LandingPage extends Component {
                     <Menu
                         theme="dark"
                         mode="horizontal"
-                        defaultSelectedKeys={['2']}
+                        defaultSelectedKeys={['1']}
                         style={{lineHeight: '64px'}}
                     >
-                        <Menu.Item key="1"><a href='#section1'> Go to section 1 </a></Menu.Item>
-                        <Menu.Item key="2"><a href='#section2'> Go to section 2 </a></Menu.Item>
+                        <Menu.Item key="1"><a href='#section1'> About us </a></Menu.Item>
+                        <Menu.Item key="2"><a href='#section2'> Our mission </a></Menu.Item>
+                        <Menu.Item key="3"><a href='#section3'> How it works </a></Menu.Item>
+                        <Menu.Item key="4"><a href='#section4'> Statistics </a></Menu.Item>
                     </Menu>
 
                 </Header>
@@ -75,12 +86,12 @@ class LandingPage extends Component {
                             <div style={{background: '#fff', padding: 24,}}>
                                 <Row>
                                     <Col span={12}>
-                                        <h1>Впечатляющий текст</h1>
-                                        <h2>Важная информация в друх строка <br/>о нас </h2>
-                                        <img alt="Картинка с чем-то очень важным" src="./media/Landing_image_1.jpg" style={{width: 700}}/>
+                                        <h1>MercyDigital by GreenTears</h1>
+                                        <h2>MercyDigital is the charity platform for most transparency and traceability of donated funds. </h2>
+                                        <img alt="Картинка с чем-то очень важным" src="./media/Landing_image_1.jpg" style={{width: 900}}/>
                                     </Col>
-                                    <Col id = 'auth' span={12} style={{position: 'fixed', zIndex: 2, marginLeft: '43%' }}    >
-                                        <p>Авторизуйтесь</p>
+                                    <Col id = 'auth' span={8} style={{position: 'fixed', zIndex: 2, marginLeft: '66%', width: 250 }}    >
+
                                         <Input.Group>
                                             <Input
                                                 placeholder="Enter your username"
@@ -100,15 +111,51 @@ class LandingPage extends Component {
                                                 ref={node => this.userPasswordInput = node}
                                             />
                                         </Input.Group>
+                                        <Link to='/Main'>
+                                            <Button type="primary" style={{width: 125}}> Log In </Button>
+                                        </Link>
+                                        <Link to='/Main'>
+                                            <Button type="primary"  style={{width: 125}}> Register </Button>
+                                        </Link>
                                     </Col>
                                 </Row>
                             </div>
                         </ScrollableAnchor>
+
                         <ScrollableAnchor id={'section2'}>
                             <div style={{background: '#fff', padding: 24, minHeight: 380}}>
+                                <Row>
+                                    <Col span={8} style={{marginTop:'10%'}}>
+                                        <h1>Confidence is one of the most significant side of charity funds activities.</h1>
+                                        <h2>Our mission is to provide funds and their donors a way to get this actions easier.</h2>
+                                    </Col>
+                                    <Col>
+                                        <img alt="Картинка с чем-то очень важным" src="./media/Landing_image_1.jpg" style={{width: 700}}/>
+                                    </Col>
+                                </Row>
+                            </div>
+                        </ScrollableAnchor>
 
-                                <h1>Тут начинается второй блок очень важного текста</h1>
-                                <img alt="Картинка с чем-то очень важным" src="./media/nature-landscape.jpg" style={{width: 700}}/>
+                        <ScrollableAnchor id={'section3'}>
+                            <div style={{background: '#fff', padding: 24, minHeight: 380}}>
+                                <Row>
+                                    <Col span={13}>
+                                        <img alt="Картинка с чем-то очень важным" src="./media/Landing_image_1.jpg" style={{width: 700}}/>
+                                    </Col>
+                                    <Col span={8} style={{marginTop:'10%', marginLeft:'10%'}}>
+                                        <h1>How it works.</h1>
+                                        <h2>You can donate with our cryptocurrency. It will be transfer to the chosen fund. All transactions are available in blockchain.
+                                            Fund will get it and show for what needs your money will be used.</h2>
+                                    </Col>
+                                </Row>
+                            </div>
+                        </ScrollableAnchor>
+
+                        <ScrollableAnchor id={'section4'}>
+                            <div style={{background: '#fff', padding: 24, minHeight: 380}}>
+
+                                <h1>Statistics in numbers</h1>
+                                <img alt="Картинка с чем-то очень важным" src="./media/Landing_image_1.jpg" style={{width: 950}}/>
                             </div>
                         </ScrollableAnchor>
                     </div>
