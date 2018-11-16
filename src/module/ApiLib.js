@@ -38,10 +38,7 @@ class ApiLib extends Component {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: username,
-          password: password
-        })
+        body: JSON.stringify(props)
     };
     const link = "mercy.digital:7080/Mercy/"
     fetch(link, requestOptions)
@@ -83,10 +80,7 @@ class ApiLib extends Component {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: username,
-          password: password
-        })
+        body: JSON.stringify(props)
     };
     const link = "mercy.digital:7080/Mercy/"
     fetch(link, requestOptions)
@@ -100,10 +94,7 @@ class ApiLib extends Component {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: username,
-          password: password
-        })
+        body: JSON.stringify(props)
     };
     const link = "mercy.digital:7080/Mercy/"
     fetch(link, requestOptions)
@@ -117,10 +108,7 @@ class ApiLib extends Component {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: username,
-          password: password
-        })
+        body: JSON.stringify(props)
     };
     const link = "mercy.digital:7080/Mercy/"
     fetch(link, requestOptions)
