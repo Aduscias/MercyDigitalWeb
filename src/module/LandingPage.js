@@ -86,7 +86,9 @@ class LandingPage extends Component {
         this.setState({IsFadeRegister: false})
     }
     CheckAuth() {
-       alert(123);
+       let account = this.state.userName;
+       let password = this.state.password;
+
     }
 //SetInfoToRegister
     SetParToRegister = (e) => {
