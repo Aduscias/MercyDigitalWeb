@@ -14,9 +14,14 @@ export class Graphics {
   barChart(name, depth) {
     ApiLib.getHistory({id: 1, account: name, depth: depth})
     .then(response => {
-      let data = response.forEach(item => item.memo.to)
-      let counts = {};
+      let data = [];
+      let l;
+      for(l=0; l<response.length; l++){
+        try{data.push(response[i].memo.to)}
+        catch(e){console.log('')}
+      }
 
+      let counts = {};
       for (let i = 0; i < arr.length; i++) {
         let num = data[i];
         counts[num] = counts[num] ? counts[num] + 1 : 1;
