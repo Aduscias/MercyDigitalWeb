@@ -33,6 +33,7 @@ class LandingPage extends Component {
             authtrouble: 'false',
             IsFadeRegister: 'true',
             ParamRegister: {'type': ''},
+            redirect: 'false',
         };
         this.handleClick = this.handleClick.bind(this);
         this.RegisterFadeIn = this.RegisterFadeIn.bind(this);
@@ -85,13 +86,29 @@ class LandingPage extends Component {
     RegisterFadeIn() {
         this.setState({IsFadeRegister: false})
     }
-   CheckAuth() {
-       let account = this.state.userName;
-       let password = this.state.password;
-       let result = ApiLib.authorize(account,password)
-       .then(response => console.log(response))
-       // console.log(result);
+
+    CheckAuth() {
+        let account = this.state.userName;
+        let password = this.state.password;
+        let result = ApiLib.authorize(account, password)
+            .then(response => {
+                //let answer = response;
+               // console.log('response:' + response);
+                //console.log('response_type:' + response.type);
+                if (response) {
+                    localStorage.setItem('account_name', account);
+                    this.setState({redirect: true})
+                } else {
+                    //this.setState({redirect: true})
+                   // console.log(response.type)
+                      //  `this.props.history.push('/main')`
+                }
+            })
     }
+
+    // console.log(result);
+
+
 //SetInfoToRegister
     SetParToRegister = (e) => {
         // console.log(e.target);
@@ -104,11 +121,24 @@ class LandingPage extends Component {
     RegisterGo() {
         let ParamRegister = {...this.state.ParamRegister};
         console.log(ParamRegister);
-        let result = ApiLib.createAccountDonor(ParamRegister)
-        .then(response => console.log(response));
+        if (ParamRegister['type'] === 'org') {
+            let result = ApiLib.createAccountOrganisation(ParamRegister)
+                .then(response => console.log(response));
+        }
+        if (ParamRegister['type'] === 'person') {
+            let result = ApiLib.createAccountDonor(ParamRegister)
+                .then(response => console.log(response));
+
+        }
     }
 
     render() {
+        console.log(this.state.redirect);
+        if (this.state.redirect === true) {
+            this.setState({redirect: false})
+            return <Redirect push to="/main" />;
+        }
+
         const {userName} = this.state;
         const {password} = this.state;
         const suffix = userName ? <Icon type="close-circle" onClick={this.emitEmpty}/> : null;
@@ -119,30 +149,24 @@ class LandingPage extends Component {
         const selectAfter = (
             <Select defaultValue="Choose type Account" style={{width: 80}}
                     onChange={(date, dateString) => this.handleChange(date, dateString, 'type')}>
-                <Option value="nko">Organization</Option>
+                <Option value="org">Organization</Option>
                 <Option value="person">Donor</Option>
             </Select>
         );
 
-
-        if (this.state.redirect) {
-            return <Redirect push to="/Main"/>;
-            // return <Link to='/Personal'></Link>
-        }
-
-        if (this.state.ParamRegister['type'] === 'nko') {
+        if (this.state.ParamRegister['type'] === 'org') {
             InputForm =
                 <div>
                     <Input style={{width: '50%'}} defaultValue="" placeholder="Account Name"
                            onChange={this.SetParToRegister}
-                           id='Account'
+                           id='account_name'
                     />
                     <Input style={{width: '50%'}}
                            prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
                            defaultValue=""
                            type="password"
                            placeholder="Enter your password"
-                           onChange={this.SetParToRegister} id='Password'
+                           onChange={this.SetParToRegister} id='password'
                     />
                     <Input style={{width: '50%'}} defaultValue="" placeholder="Organization name"
                            onChange={this.SetParToRegister} id='organization_name'
@@ -159,7 +183,8 @@ class LandingPage extends Component {
                     <Input style={{width: '50%'}} defaultValue="" placeholder="Founders"
                            onChange={this.SetParToRegister} id='founders'
                     />
-                    <DatePicker onChange={(date, dateString) => this.handleChange(date, dateString, 'registration_date')}/>
+                    <DatePicker
+                        onChange={(date, dateString) => this.handleChange(date, dateString, 'registration_date')}/>
                     <Button type="primary" style={{width: 125}} onClick={this.RegisterGo}> Go! </Button>
                 </div>
         }
@@ -266,7 +291,8 @@ class LandingPage extends Component {
                                             />
                                             {RegisterButton}
                                         </Input.Group>
-                                            <Button type="primary" style={{width: 125}}  onClick={this.CheckAuth}> Log In </Button>
+                                        <Button type="primary" style={{width: 125}} onClick={this.CheckAuth}> Log
+                                            In </Button>
                                         <Button type="primary" style={{width: 125}}
                                                 onClick={this.RegisterFadeIn}> Register </Button>
                                     </Col>
