@@ -96,8 +96,9 @@ export class ApiLib {
     .then(response => response.json())
     .then(function(response) {
       return (response.ok ? response.result : response.reason)
-    }).then(result.success ? {account_name: result.account_name,
-          type: result.type} : null)
+    }).then(function(result) {
+      return(result.success ? {account_name: result.account_name,
+          type: result.type)} : null})
   }
 
   getListOrganisations(props) {
