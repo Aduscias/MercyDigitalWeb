@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import 'whatwg-fetch';
+import MainPage from "./MainPage";
 const crypto = require('crypto');
 
 
@@ -30,10 +31,9 @@ function saltHashPassword(userpassword) {
     var salt = genRandomString(16); /** Gives us salt of length 16 */
     var passwordData = sha512(userpassword, salt);
     return(passwordData.passwordHash);
-}
 
-
-class ApiLib extends Component {
+};
+export class ApiLib {
   createAccountDonor(type, account_name, password, first_name, last_name,
     birth_date, region, job) {
     const requestOptions = {
@@ -194,5 +194,4 @@ class ApiLib extends Component {
     })
   }
 
-  render() {}
 }
