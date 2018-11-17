@@ -77,7 +77,7 @@ export default class ApiLib {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           account_name: username,
-          password: saltHashPassword(password)
+          password: password
         })
     };
     var res = {};
