@@ -13,18 +13,21 @@ class OrganizationArea extends Component {
         this.state = {
             balance:0, transaction_history:{},
         };
+        this.handleClickGetBalance = this.handleClickGetBalance.bind(this);
+        this.handleClickRefreshReport = this.handleClickRefreshReport.bind(this);
     }
 
-    getBalance(_accountName) {
-        let result = ApiLib.getBalance(_accountName)
+    getBalance() {
+        let acc_name = localStorage.getItem('account_name');
+        let result = ApiLib.getBalance(acc_name)
             .then(response => {
                 this.setState ({balance:result})
                 console.log(response)
             })
     }
 
-    handleClickGetBalance(_accountName) {
-        let res = this.getBalance(_accountName);
+    handleClickGetBalance() {
+        let res = this.getBalance();
         console.log(res);
         /*
         console.log(this.state.org);
@@ -32,11 +35,38 @@ class OrganizationArea extends Component {
         console.log(this.state.org);*/
     }
 
+
+    /*sender, receiver, amount, currency, payload*/
+    transfer(){
+        let result = ApiLib.transfer("decent","myfirstacc","1","DCT","Hello")
+            .then(response => {
+                //this.setState ({balance:result})
+                console.log(response)
+            })
+    }
+
+
+    handleClickRefreshReport() {
+        let result = ApiLib.transfer("decent","myfirstacc","1","DCT","Hello")
+            .then(response => {
+                //this.setState ({balance:result})
+                console.log(response)
+            })
+
+        //let res = this.transer();
+        //console.log(res);
+        /*
+        console.log(this.state.org);
+        this.setState({ org: testOrgNew });
+        console.log(this.state.org);*/
+    }
+
+/*
     componentDidMount() {
         let res = this.getBalance();
         console.log(res);
     }
-
+*/
     render() {
 
         return (
