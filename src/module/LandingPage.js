@@ -32,7 +32,7 @@ class LandingPage extends Component {
             password: '',
             authtrouble: 'false',
             IsFadeRegister: 'true',
-            ParamRegister: {'TypeClient': ''},
+            ParamRegister: {'type': ''},
         };
         this.handleClick = this.handleClick.bind(this);
         this.RegisterFadeIn = this.RegisterFadeIn.bind(this);
@@ -45,17 +45,17 @@ class LandingPage extends Component {
     emitEmpty = () => {
         this.userNameInput.focus();
         this.setState({userName: ''});
-    }
+    };
     emitEmptyT = () => {
         this.userPasswordInput.focus();
         this.setState({password: ''});
-    }
+    };
     onChangeUserName = (e) => {
         this.setState({userName: e.target.value});
-    }
+    };
     onChangePassword = (e) => {
         this.setState({password: e.target.value});
-    }
+    };
 
     handleClick() {
         console.log(this.state.userName);
@@ -71,8 +71,8 @@ class LandingPage extends Component {
         console.log(dateString);
         console.log(id);
         // let _value = `${value}`;
-        //this.setState({TypeClient: _value});
-        //console.log(this.state.TypeClient);
+        //this.setState({type: _value});
+        //console.log(this.state.type);
 
         if (typeof date === "object") {
             date = dateString;
@@ -118,7 +118,7 @@ class LandingPage extends Component {
 
         const selectAfter = (
             <Select defaultValue="Choose type Account" style={{width: 80}}
-                    onChange={(date, dateString) => this.handleChange(date, dateString, 'TypeClient')}>
+                    onChange={(date, dateString) => this.handleChange(date, dateString, 'type')}>
                 <Option value="nko">Organization</Option>
                 <Option value="person">Donor</Option>
             </Select>
@@ -130,7 +130,7 @@ class LandingPage extends Component {
             // return <Link to='/Personal'></Link>
         }
 
-        if (this.state.ParamRegister['TypeClient'] === 'nko') {
+        if (this.state.ParamRegister['type'] === 'nko') {
             InputForm =
                 <div>
                     <Input style={{width: '50%'}} defaultValue="" placeholder="Account Name"
@@ -164,35 +164,35 @@ class LandingPage extends Component {
                 </div>
         }
 
-        if (this.state.ParamRegister['TypeClient'] === 'person') {
+        if (this.state.ParamRegister['type'] === 'person') {
             InputForm =
                 <div>
                     <Input style={{width: '50%'}} defaultValue="" placeholder="Account Name"
                            onChange={this.SetParToRegister}
-                           id='Account'
+                           id='account_name'
                     />
                     <Input style={{width: '50%'}}
                            prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
                            defaultValue=""
                            type="password"
                            placeholder="Enter your password"
-                           onChange={this.SetParToRegister} id='Password'
+                           onChange={this.SetParToRegister} id='password'
                     />
                     <Input style={{width: '50%'}} defaultValue="" placeholder="First Name"
-                           onChange={this.SetParToRegister} id='First'
+                           onChange={this.SetParToRegister} id='first_name'
                     />
                     <Input style={{width: '50%'}} defaultValue="" placeholder="Last Name"
-                           onChange={this.SetParToRegister} id='Last'
+                           onChange={this.SetParToRegister} id='last_name'
                     />
-                    <DatePicker onChange={(date, dateString) => this.handleChange(date, dateString, 'Date')}/>
+                    <DatePicker onChange={(date, dateString) => this.handleChange(date, dateString, 'birth_date')}/>
 
                     <Select defaultValue="Сhoose you Town" style={{width: '50%'}}
-                            onChange={(date, dateString) => this.handleChange(date, dateString, 'Town')}>
+                            onChange={(date, dateString) => this.handleChange(date, dateString, 'region')}>
                         <Option value="Town1">Town1</Option>
                         <Option value="Town2">Town2</Option>
                     </Select>
                     <Select defaultValue="Сhoose you Job" style={{width: '50%'}}
-                            onChange={(date, dateString) => this.handleChange(date, dateString, 'Job')}>
+                            onChange={(date, dateString) => this.handleChange(date, dateString, 'job')}>
                         <Option value="Job1">Job1</Option>
                         <Option value="Job2">Job2</Option>
                     </Select>
