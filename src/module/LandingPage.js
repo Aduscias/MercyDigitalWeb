@@ -33,6 +33,7 @@ class LandingPage extends Component {
             authtrouble: 'false',
             IsFadeRegister: 'true',
             ParamRegister: {'type': ''},
+            redirect: 'true',
         };
         this.handleClick = this.handleClick.bind(this);
         this.RegisterFadeIn = this.RegisterFadeIn.bind(this);
@@ -95,8 +96,9 @@ class LandingPage extends Component {
                 if (answer === null) {
                     this.setState({authtrouble: true})
                 } else {
-                    console.log(response.type)
-
+                    //this.setState({redirect: true})
+                   // console.log(response.type)
+                      //  `this.props.history.push('/main')`
                 }
             })
     }
@@ -116,7 +118,7 @@ class LandingPage extends Component {
     RegisterGo() {
         let ParamRegister = {...this.state.ParamRegister};
         console.log(ParamRegister);
-        if (ParamRegister['type'] === 'nko') {
+        if (ParamRegister['type'] === 'org') {
             let result = ApiLib.createAccountOrganisation(ParamRegister)
                 .then(response => console.log(response));
         }
@@ -125,11 +127,14 @@ class LandingPage extends Component {
                 .then(response => console.log(response));
 
         }
-
-
     }
 
     render() {
+        console.log(this.state.redirect)
+        if (this.state.redirect) {
+           // return <Redirect push to="/main" />;
+        }
+
         const {userName} = this.state;
         const {password} = this.state;
         const suffix = userName ? <Icon type="close-circle" onClick={this.emitEmpty}/> : null;
@@ -140,18 +145,12 @@ class LandingPage extends Component {
         const selectAfter = (
             <Select defaultValue="Choose type Account" style={{width: 80}}
                     onChange={(date, dateString) => this.handleChange(date, dateString, 'type')}>
-                <Option value="nko">Organization</Option>
+                <Option value="org">Organization</Option>
                 <Option value="person">Donor</Option>
             </Select>
         );
 
-
-        if (this.state.redirect) {
-            return <Redirect push to="/Main"/>;
-            // return <Link to='/Personal'></Link>
-        }
-
-        if (this.state.ParamRegister['type'] === 'nko') {
+        if (this.state.ParamRegister['type'] === 'org') {
             InputForm =
                 <div>
                     <Input style={{width: '50%'}} defaultValue="" placeholder="Account Name"
