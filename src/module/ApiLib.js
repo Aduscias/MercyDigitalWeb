@@ -19,6 +19,8 @@ function genRandomString(length){
 */
 function sha512(password, salt){
     var hash = crypto.createHmac('sha512', salt); /** Hashing algorithm sha512 */
+    console.log('password is:')
+    console.log(password)
     hash.update(password);
     var value = hash.digest('hex');
     return {
@@ -35,20 +37,12 @@ function saltHashPassword(userpassword) {
 };
 
 export default class ApiLib {
-  static createAccountDonor(type, account_name, password, first_name, last_name,
-    birth_date, region, job) {
+  static createAccountDonor(props) {
+    props.Password = saltHashPassword(props.Password);
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            type: type,
-            account_name: account_name,
-            password: saltHashPassword(password),
-            first_name: first_name,
-            last_name: last_name,
-            birth_date: birth_date,
-            region: region,
-            job: job})
+        body: JSON.stringify(props)
     };
     const link = "https://mercy.digital:8443/Mercy/createAccount";
     return fetch(link, requestOptions)
