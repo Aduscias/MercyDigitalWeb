@@ -93,9 +93,12 @@ export default class ApiLib {
         })
     };
     const link = "https://mercy.digital:8443/Mercy/Auth"
-    fetch(link, requestOptions)
+    return fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(result) {
+      console.log(result);
+      console.log(result.success ? {account_name: result.account_name,
+          type: result.type} : null)
       return(result.success ? {account_name: result.account_name,
           type: result.type} : null)
     })
