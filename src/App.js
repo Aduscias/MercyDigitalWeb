@@ -10,6 +10,7 @@ import PersonalPage from './module/PersonalPage'
 import Authorize from './module/Authorize'
 import LandingPage from './module/LandingPage'
 import FooterH from './module/Footer'
+import OrganizationPage from './module/OrganizationPage'
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 class AppRoute extends Component {
@@ -39,6 +40,7 @@ class Main extends Component {
                     <Route exact path='/Personal' component={PersonalPage}/>
                     <Route exact path='/Auth' component={Authorize}/>
                     <Route exact path='/Main' component={MainPage}/>
+                    <Route exact path='/Organization' component={OrganizationPage}/>
                     <Route component={LandingPage} />
                 </Switch>
             </main>

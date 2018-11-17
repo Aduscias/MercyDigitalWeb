@@ -33,7 +33,7 @@ class LandingPage extends Component {
             authtrouble: 'false',
             IsFadeRegister: 'true',
             ParamRegister: {'type': ''},
-            redirect: 'true',
+            redirect: 'false',
         };
         this.handleClick = this.handleClick.bind(this);
         this.RegisterFadeIn = this.RegisterFadeIn.bind(this);
@@ -92,9 +92,12 @@ class LandingPage extends Component {
         let password = this.state.password;
         let result = ApiLib.authorize(account, password)
             .then(response => {
-                let answer = response.type;
-                if (answer === null) {
-                    this.setState({authtrouble: true})
+                //let answer = response;
+               // console.log('response:' + response);
+                //console.log('response_type:' + response.type);
+                if (response) {
+                    localStorage.setItem('account_name', account);
+                    this.setState({redirect: true})
                 } else {
                     //this.setState({redirect: true})
                    // console.log(response.type)
@@ -130,9 +133,10 @@ class LandingPage extends Component {
     }
 
     render() {
-        console.log(this.state.redirect)
-        if (this.state.redirect) {
-           // return <Redirect push to="/main" />;
+        console.log(this.state.redirect);
+        if (this.state.redirect === true) {
+            this.setState({redirect: false})
+            return <Redirect push to="/main" />;
         }
 
         const {userName} = this.state;
