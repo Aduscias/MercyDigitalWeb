@@ -31,6 +31,8 @@ function saltHashPassword(userpassword) {
     var passwordData = sha512(userpassword, salt);
     return(passwordData.passwordHash);
 }
+
+
 class ApiLib extends Component {
   createAccountDonor(type, account_name, password, first_name, last_name,
     birth_date, region, job) {
@@ -94,8 +96,7 @@ class ApiLib extends Component {
     .then(response => response.json())
     .then(function(response) {
       return (response.ok ? response.result : response.reason)
-    })
-    .then(result.success ? {account_name: result.account_name,
+    }).then(result.success ? {account_name: result.account_name,
           type: result.type} : null)
   }
 
@@ -163,20 +164,6 @@ class ApiLib extends Component {
     })
   }
 
-  setContent(props) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(props)
-    };
-    const link = "https://mercy.digital:8443/Mercy/"
-    fetch(link, requestOptions)
-    .then(response => response.json())
-    .then(function(response) {
-      return (response.ok ? response.type : response.reason)
-    })
-  }
-
   getBalance(accountName) {
     const requestOptions = {
         method: 'POST',
@@ -184,20 +171,6 @@ class ApiLib extends Component {
         body: JSON.stringify({accountName: accountName})
     };
     const link = "https://mercy.digital:8443/Mercy/getBalance"
-    fetch(link, requestOptions)
-    .then(response => response.json())
-    .then(function(response) {
-      return (response.ok ? response.type : response.reason)
-    })
-  }
-
-  getContent(props) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(props)
-    };
-    const link = "https://mercy.digital:8443/Mercy/"
     fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
