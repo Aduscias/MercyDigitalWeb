@@ -34,7 +34,7 @@ function saltHashPassword(userpassword) {
 
 };
 export class ApiLib {
-  createAccountDonor(type, account_name, password, first_name, last_name,
+  static createAccountDonor(type, account_name, password, first_name, last_name,
     birth_date, region, job) {
     const requestOptions = {
         method: 'POST',
@@ -57,7 +57,7 @@ export class ApiLib {
     })
   }
 
-  createAccountOrganisation(type, account_name, password, organization_name,
+  static createAccountOrganisation(type, account_name, password, organization_name,
   registration_date, legal_address, ogrn, inn, founders) {
     const requestOptions = {
         method: 'POST',
@@ -82,7 +82,7 @@ export class ApiLib {
     })
   }
 
-  authorize(username, password) {
+  static authorize(username, password) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -103,7 +103,7 @@ export class ApiLib {
   }
 
 
-  transfer(sender, receiver, amount, currency, payload) {
+  static transfer(sender, receiver, amount, currency, payload) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -123,7 +123,7 @@ export class ApiLib {
     })
   }
 
-  getHistory(props) {
+  static getHistory(props) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -153,7 +153,7 @@ export class ApiLib {
     })
   }
 
-  getBalance(accountName) {
+  static getBalance(accountName) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -167,7 +167,7 @@ export class ApiLib {
     })
   }
 
-  getInfo(name, type) {
+  static getInfo(name, type) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
