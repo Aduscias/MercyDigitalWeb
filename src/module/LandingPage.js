@@ -85,10 +85,11 @@ class LandingPage extends Component {
     RegisterFadeIn() {
         this.setState({IsFadeRegister: false})
     }
-    CheckAuth() {
+   CheckAuth() {
        let account = this.state.userName;
        let password = this.state.password;
-       ApiLib.authorize(account,password);
+       let result = ApiLib.authorize(account,password);
+       console.log(result);
     }
 //SetInfoToRegister
     SetParToRegister = (e) => {
