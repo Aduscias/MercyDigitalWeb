@@ -13,8 +13,6 @@ const InputGroup = Input.Group;
 //console.log(window.location.hash);
 window.addEventListener("hashchange", function (e) {
     //alert(window.location.hash);
-
-
     if (window.location.hash === '#section1' || window.location.hash === '') {
         document.getElementById("auth").style.display = "";
     }
@@ -38,6 +36,7 @@ class LandingPage extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.RegisterGo = this.RegisterGo.bind(this);
         this.SetParToRegister = this.SetParToRegister.bind(this);
+        this.CheckAuth = this.CheckAuth.bind(this);
     }
 
     emitEmpty = () => {
@@ -83,7 +82,9 @@ class LandingPage extends Component {
     RegisterFadeIn() {
         this.setState({IsFadeRegister: false})
     }
-
+    CheckAuth() {
+       alert(123);
+    }
 //SetInfoToRegister
     SetParToRegister = (e) => {
         // console.log(e.target);
@@ -94,7 +95,6 @@ class LandingPage extends Component {
     };
 
     RegisterGo() {
-
         let ParamRegister = {...this.state.ParamRegister};
         console.log(ParamRegister);
     }
@@ -120,7 +120,6 @@ class LandingPage extends Component {
             return <Redirect push to="/Main"/>;
             // return <Link to='/Personal'></Link>
         }
-
 
         if (this.state.ParamRegister['TypeClient'] === 'nko') {
             InputForm =
@@ -205,7 +204,6 @@ class LandingPage extends Component {
             </div>;
         }
 
-
         return (
             <Layout>
                 <Header style={{position: 'fixed', zIndex: 1, width: '100%'}}>
@@ -260,7 +258,7 @@ class LandingPage extends Component {
                                             {RegisterButton}
                                         </Input.Group>
                                         <Link to='/Main'>
-                                            <Button type="primary" style={{width: 125}}> Log In </Button>
+                                            <Button type="primary" style={{width: 125}}  onClick={this.CheckAuth}> Log In </Button>
                                         </Link>
                                         <Button type="primary" style={{width: 125}}
                                                 onClick={this.RegisterFadeIn}> Register </Button>
