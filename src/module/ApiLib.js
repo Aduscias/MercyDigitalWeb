@@ -189,4 +189,18 @@ export default class ApiLib {
     // })
   }
 
+  static getAccInfo(name, type) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name,
+          type: type,
+        })
+    };
+    const link = "https://mercy.digital:8443/Mercy/getAccInfo";
+    return fetch(link, requestOptions)
+    .then(response => response.json())
+  }
+
 }
