@@ -185,4 +185,15 @@ export default class ApiLib {
     })
   }
 
+  static getOrgList() {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: {}
+    };
+    const link = "https://mercy.digital:8443/Mercy/getOrgList";
+    return fetch(link, requestOptions)
+    .then(response => response.json())
+  }
+
 }
