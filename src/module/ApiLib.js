@@ -52,7 +52,7 @@ export default class ApiLib {
     //   return (response.ok ? response.result : response.reason)
     // })
     .catch(response => console.log(response))
-  }
+  };
 
   static createAccountOrganisation(props) {
     // props.password = saltHashPassword(props.password);
@@ -65,11 +65,12 @@ export default class ApiLib {
     const link = "https://mercy.digital:8443/Mercy/createAccount";
     return fetch(link, requestOptions)
     .then(response => response.json())
-    .then(function(response) {
-      console.log(response);
-      return (response.ok ? response.result : response.reason)
-    }).catch(response => console.log(response))
-  }
+    // .then(function(response) {
+    //   console.log(response);
+    //   return (response.ok ? response.result : response.reason)
+    // })
+    .catch(response => console.log(response))
+  };
 
   static authorize(username, password) {
     const requestOptions = {
@@ -80,7 +81,6 @@ export default class ApiLib {
           password: password
         })
     };
-    var res = {};
     const link = "https://mercy.digital:8443/Mercy/Auth";
     return fetch(link, requestOptions)
     .then(response => response.json())
@@ -91,7 +91,7 @@ export default class ApiLib {
       return(result.success == 'true' ? {account_name: result.account_name,
           type: result.type} : null);
     });
-  }
+  };
 
 
   static transfer(sender, receiver, amount, currency, payload) {
@@ -112,7 +112,7 @@ export default class ApiLib {
     .then(function(response) {
       return (response.ok ? response.result : response.reason)
     })
-  }
+  };
 
   static getHistory(props) {
     const requestOptions = {
@@ -125,8 +125,8 @@ export default class ApiLib {
     .then(response => response.json())
     .then(response => response.result)
     .then(function(result) {
-      var i;
-      var res = [];
+      let i;
+      let res = [];
       for (i=0; i < result.length; i++) {
         try {
           /* for tranfers */
@@ -142,7 +142,7 @@ export default class ApiLib {
       };
       return(res);
     })
-  }
+  };
 
   static getBalance(accountName) {
     const requestOptions = {
@@ -156,7 +156,7 @@ export default class ApiLib {
     .then(function(response) {
       return (response.ok ? response.type : response.reason)
     })
-  }
+  };
 
   static getInfo(name, type) {
     const requestOptions = {
@@ -172,20 +172,20 @@ export default class ApiLib {
     .then(function(response) {
       return (response.ok ? response.type : response.reason)
     })
-  }
+  };
 
-  static getOrgList() {
+  static getOrgsList(props) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: {}
+        body: JSON.stringify({})
     };
     const link = "https://mercy.digital:8443/Mercy/getOrgList";
     return fetch(link, requestOptions)
     .then(response => response.json())
-    .then(function(response) {
-      console.log(response)
-    })
+    // .then(function(response) {
+    //   console.log(response)
+    // })
   }
 
 }
