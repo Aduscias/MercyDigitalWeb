@@ -100,7 +100,7 @@ export default class ApiLib {
       // console.log(result);
       // console.log(result.success ? {account_name: result.account_name,
       //     type: result.type} : null)
-      return(result.success ? {account_name: result.account_name,
+      return(result.success == 'true' ? {account_name: result.account_name,
           type: result.type} : null);
     });
   }
