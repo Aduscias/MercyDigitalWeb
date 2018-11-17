@@ -51,7 +51,7 @@ export default class ApiLib {
             job: job})
     };
     const link = "https://mercy.digital:8443/Mercy/createAccount";
-    fetch(link, requestOptions)
+    return fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
       return (response.ok ? response.result : response.reason)
@@ -76,7 +76,7 @@ export default class ApiLib {
         })
     };
     const link = "https://mercy.digital:8443/Mercy/createAccount";
-    fetch(link, requestOptions)
+    return fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
       return (response.ok ? response.result : response.reason)
@@ -96,9 +96,9 @@ export default class ApiLib {
     return fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(result) {
-      console.log(result);
-      console.log(result.success ? {account_name: result.account_name,
-          type: result.type} : null)
+      // console.log(result);
+      // console.log(result.success ? {account_name: result.account_name,
+      //     type: result.type} : null)
       return(result.success ? {account_name: result.account_name,
           type: result.type} : null)
     })
@@ -118,7 +118,7 @@ export default class ApiLib {
         })
     };
     const link = "https://mercy.digital:8443/Mercy/Transfer"
-    fetch(link, requestOptions)
+    return fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
       return (response.ok ? response.result : response.reason)
@@ -132,7 +132,7 @@ export default class ApiLib {
         body: JSON.stringify(props)
     };
     const link = "https://mercy.digital:8443/Mercy/getHistory"
-    fetch(link, requestOptions)
+    return fetch(link, requestOptions)
     .then(response => response.json())
     .then(response => response.result)
     .then(function(result) {
@@ -162,7 +162,7 @@ export default class ApiLib {
         body: JSON.stringify({accountName: accountName})
     };
     const link = "https://mercy.digital:8443/Mercy/getBalance"
-    fetch(link, requestOptions)
+    return fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
       return (response.ok ? response.type : response.reason)
@@ -178,7 +178,7 @@ export default class ApiLib {
               type: type})
     };
     const link = "https://mercy.digital:8443/Mercy/getInfo"
-    fetch(link, requestOptions)
+    return fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
       return (response.ok ? response.type : response.reason)
