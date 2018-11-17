@@ -21,7 +21,64 @@ class CardOrg extends Component {
         this.setState({ org: testOrgNew });
         console.log(this.state.org);
     }
+
     render() {
+
+        function toJsx(str) {
+            return str;
+        }
+
+
+        function renderThreeOrg (orgsArr){
+
+            if (orgsArr.length == 3) {
+                return (
+                    <Row type="flex">
+                        <Col span={8} id={orgsArr[0].id}>
+                            <Card title={orgsArr[0].title} extra={<a href="#">Подробнее</a>}>
+                                <p>{orgsArr[0].description}</p>
+                            </Card>
+                        </Col>
+                        <Col span={8} id={orgsArr[1].id}>
+                            <Card title={orgsArr[1].title} extra={<a href="#">Подробнее</a>}>
+                                <p>{orgsArr[1].description}</p>
+                            </Card>
+                        </Col>
+                        <Col span={8} id={orgsArr[2].id}>
+                            <Card title={orgsArr[2].title} extra={<a href="#">Подробнее</a>}>
+                                <p>{orgsArr[2].description}</p>
+                            </Card>
+                        </Col>
+                    </Row>);
+            }
+            if (orgsArr.length == 2) {
+                return (
+                    <Row type="flex" >
+                        <Col span={8} id={orgsArr[0].id}>
+                            <Card title={orgsArr[0].title} extra={<a href="#">Подробнее</a>}>
+                                <p>{orgsArr[0].description}</p>
+                            </Card>
+                        </Col>
+                        <Col span={8} id={orgsArr[1].id}>
+                            <Card title={orgsArr[1].title} extra={<a href="#">Подробнее</a>}>
+                                <p>{orgsArr[1].description}</p>
+                            </Card>
+                        </Col>
+                    </Row>);
+            }
+            if (orgsArr.length == 1) {
+                return (
+                    <Row type="flex">
+                        <Col span={8} id={orgsArr[0].id}>
+                            <Card title={orgsArr[0].title} extra={<a href="#">Подробнее</a>}>
+                                <p>{orgsArr[0].description}</p>
+                            </Card>
+                        </Col>
+                    </Row>);
+            }
+        }
+
+
         const renderOrg = this.state.org.map(function (paramOrg) {
             return (
                 <Col span={8} id={paramOrg.id}>
@@ -31,11 +88,25 @@ class CardOrg extends Component {
                 </Col>
             )
         });
+
+
+        let text = [];
+        for (let i=0; i<this.state.org.length; i+=3){
+            let cnt = [];
+
+            for (let j = i; j < Math.min(this.state.org.length, i+3); j++) {
+                cnt.push (this.state.org[j]);
+            }
+
+            console.log(cnt);
+            text.push(renderThreeOrg(cnt));
+        }
+
+
+
         return (
             <div>
-                <Row type="flex" justify="center" align="middle">
-                    {renderOrg}
-                </Row>
+                {text}
                 <Button type="primary" onClick={this.handleClick}> Поменяй Json!</Button>
             </div>
         );
@@ -70,7 +141,7 @@ let testOrg = [
     {
         id: 2,
         title: "Собаки - наше все",
-        description: "<== Они врут, лучше всех в доме будет с собакой",
+        description: "Они врут, лучше всех в доме будет с собакой",
         logo: "logo2.png",
     },
     {
