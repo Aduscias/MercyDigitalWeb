@@ -80,7 +80,6 @@ export default class ApiLib {
           password: password
         })
     };
-    var res = {};
     const link = "https://mercy.digital:8443/Mercy/Auth";
     return fetch(link, requestOptions)
     .then(response => response.json())
@@ -174,7 +173,7 @@ export default class ApiLib {
     })
   }
 
-  static getOrgList() {
+  static getOrgList(props) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
