@@ -173,11 +173,11 @@ export default class ApiLib {
     })
   };
 
-  static getOrgList(props) {
+  static getOrgsList(props) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: {}
+        body: JSON.stringify({})
     };
     const link = "https://mercy.digital:8443/Mercy/getOrgList";
     return fetch(link, requestOptions)
