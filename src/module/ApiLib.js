@@ -33,7 +33,7 @@ function saltHashPassword(userpassword) {
     return(passwordData.passwordHash);
 
 };
-export class ApiLib {
+export default class ApiLib {
   createAccountDonor(type, account_name, password, first_name, last_name,
     birth_date, region, job) {
     const requestOptions = {
@@ -82,7 +82,7 @@ export class ApiLib {
     })
   }
 
-  authorize(username, password) {
+   authorize(username, password) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
