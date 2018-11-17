@@ -65,10 +65,11 @@ export default class ApiLib {
     const link = "https://mercy.digital:8443/Mercy/createAccount";
     return fetch(link, requestOptions)
     .then(response => response.json())
-    .then(function(response) {
-      console.log(response);
-      return (response.ok ? response.result : response.reason)
-    }).catch(response => console.log(response))
+    // .then(function(response) {
+    //   console.log(response);
+    //   return (response.ok ? response.result : response.reason)
+    // })
+    .catch(response => console.log(response))
   };
 
   static authorize(username, password) {
@@ -124,8 +125,8 @@ export default class ApiLib {
     .then(response => response.json())
     .then(response => response.result)
     .then(function(result) {
-      var i;
-      var res = [];
+      let i;
+      let res = [];
       for (i=0; i < result.length; i++) {
         try {
           /* for tranfers */
