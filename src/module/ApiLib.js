@@ -33,7 +33,8 @@ function saltHashPassword(userpassword) {
     return(passwordData.passwordHash);
 
 };
-export class ApiLib {
+
+export default class ApiLib {
   static createAccountDonor(type, account_name, password, first_name, last_name,
     birth_date, region, job) {
     const requestOptions = {

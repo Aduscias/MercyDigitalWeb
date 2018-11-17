@@ -88,7 +88,7 @@ class LandingPage extends Component {
     CheckAuth() {
        let account = this.state.userName;
        let password = this.state.password;
-
+       ApiLib.authorize(account,password);
     }
 //SetInfoToRegister
     SetParToRegister = (e) => {
@@ -262,9 +262,7 @@ class LandingPage extends Component {
                                             />
                                             {RegisterButton}
                                         </Input.Group>
-                                        <Link to='/Main'>
                                             <Button type="primary" style={{width: 125}}  onClick={this.CheckAuth}> Log In </Button>
-                                        </Link>
                                         <Button type="primary" style={{width: 125}}
                                                 onClick={this.RegisterFadeIn}> Register </Button>
                                     </Col>
