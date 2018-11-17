@@ -17,7 +17,7 @@ class CardOrg extends Component {
         this.state = {
             org: testOrg
         };
-        this.handleClick = this.handleClick.bind(this);
+        //this.handleClick = this.handleClick.bind(this);
     }
 
 
@@ -27,7 +27,10 @@ class CardOrg extends Component {
 
         const tr = 'hey';
         let result = ApiLib.getOrgsList(tr)
-            .then(response => console.log(response))
+            .then(response => {
+                this.setState ({org:response})
+                console.log(response)
+            })
 
 
     }
@@ -42,7 +45,10 @@ class CardOrg extends Component {
     }
 
 
-
+    componentDidMount() {
+        let res = this.getOrgsList();
+        console.log(res);
+    }
 
 
     render() {
