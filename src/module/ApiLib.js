@@ -154,9 +154,9 @@ export default class ApiLib {
     const link = "https://mercy.digital:8443/Mercy/getBalance"
     return fetch(link, requestOptions)
     .then(response => response.json())
-    .then(function(response) {
-      return (response.ok ? response.type : response.reason)
-    })
+    // .then(function(response) {
+    //   return (response.ok ? response.result : response.reason)
+    // })
   };
 
   static getInfo(name, type) {
