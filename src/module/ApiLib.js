@@ -182,9 +182,9 @@ export default class ApiLib {
     const link = "https://mercy.digital:8443/Mercy/getOrgList";
     return fetch(link, requestOptions)
     .then(response => response.json())
-    .then(function(response) {
-      console.log(response)
-    })
+    // .then(function(response) {
+    //   console.log(response)
+    // })
   }
 
 }
