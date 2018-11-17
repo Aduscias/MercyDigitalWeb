@@ -1,13 +1,76 @@
 import React, {Component} from 'react';
 import 'whatwg-fetch';
+const crypto = require('crypto');
 
 
 class ApiLib extends Component {
-  register(props) {
+  genRandomString(length){
+    return crypto.randomBytes(Math.ceil(length/2))
+            .toString('hex') /** convert to hexadecimal format */
+            .slice(0,length);   /** return required number of characters */
+  };
+
+/**
+ * hash password with sha512.
+ * @function
+ * @param {string} password - List of required fields.
+ * @param {string} salt - Data to be validated.
+ */
+  sha512(password, salt){
+      var hash = crypto.createHmac('sha512', salt); /** Hashing algorithm sha512 */
+      hash.update(password);
+      var value = hash.digest('hex');
+      return {
+          salt: salt,
+          passwordHash: value
+      };
+  };
+
+  saltHashPassword(userpassword) {
+      var salt = genRandomString(16); /** Gives us salt of length 16 */
+      var passwordData = sha512(userpassword, salt);
+      return(passwordData.passwordHash);
+  }
+
+  createAccountDonor(type, account_name, password, first_name, last_name,
+    birth_date, region, job) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(props)
+        body: JSON.stringify({
+            type: type,
+            account_name: account_name,
+            password: saltHashPassword(password),
+            first_name: first_name,
+            last_name: last_name,
+            birth_date: birth_date,
+            region: region,
+            job: job})
+    };
+    const link = "https://mercy.digital:8443/Mercy/createAccount";
+    fetch(link, requestOptions)
+    .then(response => response.json())
+    .then(function(response) {
+      return (response.ok ? response.result : response.reason)
+    })
+  }
+
+  createAccountOrganisation(type, account_name, password, organization_name,
+  registration_date, legal_address, ogrn, inn, founders) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: type,
+          account_name: account_name,
+          password: saltHashPassword(password),
+          organization_name: organization_name,
+          registration_date: registration_date,
+          legal_address: legal_address,
+          ogrn: ogrn,
+          inn: inn,
+          founders: founders
+        })
     };
     const link = "https://mercy.digital:8443/Mercy/createAccount";
     fetch(link, requestOptions)
@@ -22,19 +85,21 @@ class ApiLib extends Component {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          username: username,
-          password: password
+          account_name: username,
+          password: saltHashPassword(password)
         })
     };
-    const link = "https://mercy.digital:8443/Mercy/"
+    const link = "https://mercy.digital:8443/Mercy/Auth"
     fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
-      return (response.ok ? response.type : response.reason)
+      return (response.ok ? response.result : response.reason)
     })
+    .then(result.success ? {account_name: result.account_name,
+          type: result.type} : null)
   }
 
-  getOrgs(props) {
+  getListOrganisations(props) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -44,21 +109,27 @@ class ApiLib extends Component {
     fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
-      return (response.ok ? response.type : response.reason)
+      return (response.ok ? response.result : response.reason)
     })
   }
 
-  transfer(props) {
+  transfer(sender, receiver, amount, currency, payload) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(props)
+        body: JSON.stringify({
+          sender: sender,
+          receiver: receiver,
+          amount: amount,
+          currency: currency,
+          payload: payload
+        })
     };
-    const link = "https://mercy.digital:8443/Mercy/"
+    const link = "https://mercy.digital:8443/Mercy/Transfer"
     fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
-      return (response.ok ? response.data : response.reason)
+      return (response.ok ? response.result : response.reason)
     })
   }
 
@@ -106,13 +177,13 @@ class ApiLib extends Component {
     })
   }
 
-  getBalance(props) {
+  getBalance(accountName) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(props)
+        body: JSON.stringify({accountName: accountName})
     };
-    const link = "https://mercy.digital:8443/Mercy/"
+    const link = "https://mercy.digital:8443/Mercy/getBalance"
     fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
@@ -127,6 +198,22 @@ class ApiLib extends Component {
         body: JSON.stringify(props)
     };
     const link = "https://mercy.digital:8443/Mercy/"
+    fetch(link, requestOptions)
+    .then(response => response.json())
+    .then(function(response) {
+      return (response.ok ? response.type : response.reason)
+    })
+  }
+
+  getInfo(name, type) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+              name: name,
+              type: type})
+    };
+    const link = "https://mercy.digital:8443/Mercy/getInfo"
     fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
