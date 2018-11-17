@@ -22,10 +22,10 @@ class CardOrg extends Component {
         console.log(this.state.org);
     }
     render() {
-        let renderOrg = this.state.org.map(function (paramOrg) {
+        const renderOrg = this.state.org.map(function (paramOrg) {
             return (
-                <Col span={8} id={paramOrg.id} key={paramOrg.id}>
-                    <Card title={paramOrg.title} key={paramOrg.id} extra={<a href="#">Подробнее</a>}>
+                <Col span={8} id={paramOrg.id}>
+                    <Card title={paramOrg.title} extra={<a href="#">Подробнее</a>}>
                         <p>{paramOrg.description}</p>
                     </Card>
                 </Col>
@@ -44,17 +44,17 @@ class CardOrg extends Component {
 
 class MainPage extends Component {
     render() {
-            return (
+        return (
 
-                <div>
-                    <ReactCSSTransitionGroup transitionName="example"
-                                             transitionAppear={true} transitionAppearTimeout={500}
-                                             transitionEnter={false} transitionLeave={false}>
-                        <Header />
-                        <CardOrg />
-                    </ReactCSSTransitionGroup>
-                </div>
-            );
+            <div>
+                <ReactCSSTransitionGroup transitionName="example"
+                                         transitionAppear={true} transitionAppearTimeout={500}
+                                         transitionEnter={false} transitionLeave={false}>
+                    <Header />
+                    <CardOrg />
+                </ReactCSSTransitionGroup>
+            </div>
+        );
     }
 }
 
