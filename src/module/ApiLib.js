@@ -38,43 +38,37 @@ function saltHashPassword(userpassword) {
 
 export default class ApiLib {
   static createAccountDonor(props) {
-    props.Password = saltHashPassword(props.Password);
+    // props.password = saltHashPassword(props.password);
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(props)
     };
+    console.log(requestOptions);
     const link = "https://mercy.digital:8443/Mercy/createAccount";
     return fetch(link, requestOptions)
     .then(response => response.json())
-    .then(function(response) {
-      return (response.ok ? response.result : response.reason)
-    })
+    // .then(function(response) {
+    //   return (response.ok ? response.result : response.reason)
+    // })
+    .catch(response => console.log(response))
   }
 
-  static createAccountOrganisation(type, account_name, password, organization_name,
-  registration_date, legal_address, ogrn, inn, founders) {
+  static createAccountOrganisation(props) {
+    // props.password = saltHashPassword(props.password);
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: type,
-          account_name: account_name,
-          password: saltHashPassword(password),
-          organization_name: organization_name,
-          registration_date: registration_date,
-          legal_address: legal_address,
-          ogrn: ogrn,
-          inn: inn,
-          founders: founders
-        })
+        body: JSON.stringify(props)
     };
+    console.log(requestOptions);
     const link = "https://mercy.digital:8443/Mercy/createAccount";
     return fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(response) {
+      console.log(response);
       return (response.ok ? response.result : response.reason)
-    })
+    }).catch(response => console.log(response))
   }
 
   static authorize(username, password) {
