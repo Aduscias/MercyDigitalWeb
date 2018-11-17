@@ -104,6 +104,8 @@ class LandingPage extends Component {
     RegisterGo() {
         let ParamRegister = {...this.state.ParamRegister};
         console.log(ParamRegister);
+        let result = ApiLib.createAccountDonor(ParamRegister)
+        .then(response => console.log(response));
     }
 
     render() {
