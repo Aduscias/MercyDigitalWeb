@@ -85,13 +85,25 @@ class LandingPage extends Component {
     RegisterFadeIn() {
         this.setState({IsFadeRegister: false})
     }
-   CheckAuth() {
-       let account = this.state.userName;
-       let password = this.state.password;
-       let result = ApiLib.authorize(account,password)
-       .then(response => console.log(response))
-       // console.log(result);
+
+    CheckAuth() {
+        let account = this.state.userName;
+        let password = this.state.password;
+        let result = ApiLib.authorize(account, password)
+            .then(response => {
+                let answer = response.type;
+                if (answer === null) {
+                    this.setState({authtrouble: true})
+                } else {
+                    console.log(response.type)
+
+                }
+            })
     }
+
+    // console.log(result);
+
+
 //SetInfoToRegister
     SetParToRegister = (e) => {
         // console.log(e.target);
@@ -104,8 +116,17 @@ class LandingPage extends Component {
     RegisterGo() {
         let ParamRegister = {...this.state.ParamRegister};
         console.log(ParamRegister);
-        let result = ApiLib.createAccountDonor(ParamRegister)
-        .then(response => console.log(response));
+        if (ParamRegister['type'] === 'nko') {
+            let result = ApiLib.createAccountOrganisation(ParamRegister)
+                .then(response => console.log(response));
+        }
+        if (ParamRegister['type'] === 'person') {
+            let result = ApiLib.createAccountDonor(ParamRegister)
+                .then(response => console.log(response));
+
+        }
+
+
     }
 
     render() {
@@ -135,14 +156,14 @@ class LandingPage extends Component {
                 <div>
                     <Input style={{width: '50%'}} defaultValue="" placeholder="Account Name"
                            onChange={this.SetParToRegister}
-                           id='Account'
+                           id='account_name'
                     />
                     <Input style={{width: '50%'}}
                            prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
                            defaultValue=""
                            type="password"
                            placeholder="Enter your password"
-                           onChange={this.SetParToRegister} id='Password'
+                           onChange={this.SetParToRegister} id='password'
                     />
                     <Input style={{width: '50%'}} defaultValue="" placeholder="Organization name"
                            onChange={this.SetParToRegister} id='organization_name'
@@ -159,7 +180,8 @@ class LandingPage extends Component {
                     <Input style={{width: '50%'}} defaultValue="" placeholder="Founders"
                            onChange={this.SetParToRegister} id='founders'
                     />
-                    <DatePicker onChange={(date, dateString) => this.handleChange(date, dateString, 'registration_date')}/>
+                    <DatePicker
+                        onChange={(date, dateString) => this.handleChange(date, dateString, 'registration_date')}/>
                     <Button type="primary" style={{width: 125}} onClick={this.RegisterGo}> Go! </Button>
                 </div>
         }
@@ -266,7 +288,8 @@ class LandingPage extends Component {
                                             />
                                             {RegisterButton}
                                         </Input.Group>
-                                            <Button type="primary" style={{width: 125}}  onClick={this.CheckAuth}> Log In </Button>
+                                        <Button type="primary" style={{width: 125}} onClick={this.CheckAuth}> Log
+                                            In </Button>
                                         <Button type="primary" style={{width: 125}}
                                                 onClick={this.RegisterFadeIn}> Register </Button>
                                     </Col>
