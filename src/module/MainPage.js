@@ -4,8 +4,11 @@
 import '../App.css';
 import React, {Component} from 'react';
 import {Row, Col, Button, Card} from 'antd';
-import Header from '../module/Header'
+import Header from '../module/Header';
+import ApiLib from '../module/ApiLib';
 let ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+
+
 
 class CardOrg extends Component {
     constructor(props) {
@@ -16,11 +19,31 @@ class CardOrg extends Component {
         };
         this.handleClick = this.handleClick.bind(this);
     }
+
+
+
+
+    getOrgsList() {
+
+        const tr = 'hey';
+        let result = ApiLib.getOrgsList(tr)
+            .then(response => console.log(response))
+
+
+    }
+
     handleClick() {
+        let res = this.getOrgsList();
+        console.log(res);
+        /*
         console.log(this.state.org);
         this.setState({ org: testOrgNew });
-        console.log(this.state.org);
+        console.log(this.state.org);*/
     }
+
+
+
+
 
     render() {
 
