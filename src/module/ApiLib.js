@@ -92,7 +92,8 @@ export default class ApiLib {
           password: saltHashPassword(password)
         })
     };
-    const link = "https://mercy.digital:8443/Mercy/Auth"
+    var res = {};
+    const link = "https://mercy.digital:8443/Mercy/Auth";
     return fetch(link, requestOptions)
     .then(response => response.json())
     .then(function(result) {
@@ -100,8 +101,8 @@ export default class ApiLib {
       // console.log(result.success ? {account_name: result.account_name,
       //     type: result.type} : null)
       return(result.success ? {account_name: result.account_name,
-          type: result.type} : null)
-    })
+          type: result.type} : null);
+    });
   }
 
 
@@ -194,6 +195,9 @@ export default class ApiLib {
     const link = "https://mercy.digital:8443/Mercy/getOrgList";
     return fetch(link, requestOptions)
     .then(response => response.json())
+    .then(function(response) {
+      console.log(response)
+    })
   }
 
 }

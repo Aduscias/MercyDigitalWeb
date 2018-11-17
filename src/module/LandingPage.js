@@ -88,8 +88,9 @@ class LandingPage extends Component {
    CheckAuth() {
        let account = this.state.userName;
        let password = this.state.password;
-       let result = ApiLib.authorize(account,password);
-       console.log(result);
+       let result = ApiLib.authorize(account,password)
+       .then(response => console.log(response))
+       // console.log(result);
     }
 //SetInfoToRegister
     SetParToRegister = (e) => {
