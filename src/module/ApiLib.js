@@ -98,22 +98,10 @@ export class ApiLib {
       return (response.ok ? response.result : response.reason)
     }).then(function(result) {
       return(result.success ? {account_name: result.account_name,
-          type: result.type)} : null})
-  }
-
-  getListOrganisations(props) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(props)
-    };
-    const link = "https://mercy.digital:8443/Mercy/"
-    fetch(link, requestOptions)
-    .then(response => response.json())
-    .then(function(response) {
-      return (response.ok ? response.result : response.reason)
+          type: result.type} : null)
     })
   }
+
 
   transfer(sender, receiver, amount, currency, payload) {
     const requestOptions = {
