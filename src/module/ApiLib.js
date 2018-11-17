@@ -52,7 +52,7 @@ export default class ApiLib {
     //   return (response.ok ? response.result : response.reason)
     // })
     .catch(response => console.log(response))
-  }
+  };
 
   static createAccountOrganisation(props) {
     // props.password = saltHashPassword(props.password);
@@ -69,7 +69,7 @@ export default class ApiLib {
       console.log(response);
       return (response.ok ? response.result : response.reason)
     }).catch(response => console.log(response))
-  }
+  };
 
   static authorize(username, password) {
     const requestOptions = {
@@ -90,7 +90,7 @@ export default class ApiLib {
       return(result.success == 'true' ? {account_name: result.account_name,
           type: result.type} : null);
     });
-  }
+  };
 
 
   static transfer(sender, receiver, amount, currency, payload) {
@@ -111,7 +111,7 @@ export default class ApiLib {
     .then(function(response) {
       return (response.ok ? response.result : response.reason)
     })
-  }
+  };
 
   static getHistory(props) {
     const requestOptions = {
@@ -141,7 +141,7 @@ export default class ApiLib {
       };
       return(res);
     })
-  }
+  };
 
   static getBalance(accountName) {
     const requestOptions = {
@@ -155,7 +155,7 @@ export default class ApiLib {
     .then(function(response) {
       return (response.ok ? response.type : response.reason)
     })
-  }
+  };
 
   static getInfo(name, type) {
     const requestOptions = {
@@ -171,7 +171,7 @@ export default class ApiLib {
     .then(function(response) {
       return (response.ok ? response.type : response.reason)
     })
-  }
+  };
 
   static getOrgList(props) {
     const requestOptions = {
