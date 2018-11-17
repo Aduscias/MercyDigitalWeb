@@ -45,10 +45,10 @@ class CardOrg extends Component {
     }
 
 
-    componentDidMount() {
+   /* componentDidMount() {
         let res = this.getOrgsList();
-        console.log(res);
-    }
+        console.log('res:'+res);
+    }*/
 
 
     render() {
