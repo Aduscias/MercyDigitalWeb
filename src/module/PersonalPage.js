@@ -12,10 +12,11 @@ class PersonalArea extends Component {
         // Don't call this.setState() here!
         this.state = {
             balance: 0,
-            transaction_history: {},
+            transaction_history: data,
+
         };
         this.handleClickGetBalance = this.handleClickGetBalance.bind(this);
-        //this.handleClickTransactionHistory = this.handleClickTransactionHistory(this);
+        this.handleClickUpdateTran = this.handleClickUpdateTran(this);
     }
 
 
@@ -44,7 +45,9 @@ class PersonalArea extends Component {
         console.log(this.state.org);*/
     }
 
-
+    handleClickUpdateTran(){
+        this.setState({transaction_history: new_data})
+    }
     componentDidMount() {
         this.getBalance();
         //console.log(res);
@@ -82,7 +85,7 @@ class PersonalArea extends Component {
                 <Row type="flex" justify="center" align="middle">
                     <Col span={8}>
 
-                        <Button type="primary"  style={{width: 200}}> История транзакций </Button>
+                        <Button type="primary"  style={{width: 200}}> Update History </Button>
 
                     </Col>
                     <Col span={8}>
@@ -96,12 +99,12 @@ class PersonalArea extends Component {
                     </Col>
                     <Col span={8}>
 
-                        <Button type="primary"  style={{width: 200}}> Статистика </Button>
+                        <Button type="primary"  style={{width: 200}} onClick={this.handleClickUpdateTran}> Статистика </Button>
 
                     </Col>
                 </Row>
                 <Row>
-                    <Table columns={columns} dataSource={data} />
+                    <Table columns={columns} dataSource={this.state.transaction_history} />
 
                 </Row>
             </div>
