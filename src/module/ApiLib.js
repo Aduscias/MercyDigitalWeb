@@ -110,7 +110,7 @@ export default class ApiLib {
     const link = "https://mercy.digital:8443/Mercy/Transfer"
     return fetch(link, requestOptions)
     .then(response => response.json())
-    
+
   };
 
   static getHistory(props) {
@@ -129,14 +129,14 @@ export default class ApiLib {
       for (i=0; i < result.length; i++) {
         try {
           /* for tranfers */
-          res.push({'description': result[i].description,
-                    'memo': result[i].op[1].memo,
-                    'amount': result[i].op[1].amount});
+          res.push({description: result[i].description,
+                    memo: result[i].op[1].memo,
+                    amount: result[i].op[1].amount});
         } catch(e) {
           /* for other stuff */
-          res.push({'description': result[i].description,
-                    'memo': result[i].op[1].options.memo_key,
-                    'amount': result[i].op[1].fee});
+          res.push({description: result[i].description,
+                    memo: result[i].op[1].options.memo_key,
+                    amount: result[i].op[1].fee});
         }
       };
       return(res);
