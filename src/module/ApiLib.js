@@ -110,9 +110,7 @@ export default class ApiLib {
     const link = "https://mercy.digital:8443/Mercy/Transfer"
     return fetch(link, requestOptions)
     .then(response => response.json())
-    .then(function(response) {
-      return (response.ok ? response.result : response.reason)
-    })
+    
   };
 
   static getHistory(props) {
