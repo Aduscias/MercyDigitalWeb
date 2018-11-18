@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Header from '../module/Header';
-import {Row, Col, Button, Card, Input} from 'antd';
+import {Row, Col, Button, Card, Input,Table, Divider, Tag } from 'antd';
 import {Redirect} from 'react-router';
 import {Link} from 'react-router-dom';
 import ApiLib from "./ApiLib";
@@ -21,7 +21,7 @@ class PersonalArea extends Component {
 
     getBalance() {
         let acc_name = localStorage.getItem('account_name');
-        ApiLib.getBalance(acc_name)
+        ApiLib.getBalance('decent')
             .then(response => {
                 //this.setState ({balance:result})
                 /* console.log(response);
@@ -50,7 +50,31 @@ class PersonalArea extends Component {
         //console.log(res);
     }
 
+
     render() {
+        const columns = [{
+            title: 'Sender',
+            dataIndex: 'name',
+            key: 'name',
+            render: text => <a href="javascript:;">{text}</a>,
+        }, {
+            title: 'Receiver',
+            dataIndex: 'age',
+            key: 'age',
+        }, {
+            title: 'Amount',
+            dataIndex: 'address',
+            key: 'address',
+        }, {
+            title: 'Comment',
+            key: 'tags',
+            dataIndex: 'tags',
+            render: tags => (
+                <span>
+      {tags.map(tag => <Tag color="blue" key={tag}>{tag}</Tag>)}
+    </span>
+            ),
+        }];
 
         return (
             <div>
@@ -76,9 +100,62 @@ class PersonalArea extends Component {
 
                     </Col>
                 </Row>
+                <Row>
+                    <Table columns={columns} dataSource={data} />
+
+                </Row>
             </div>
         );
     }
 }
 
 export default PersonalArea;
+
+
+
+
+const data = [{
+    key: '1',
+    name: 'testtestrt',
+    age: 'testtestrtre',
+    address: 5,
+    tags: ['Cats'],
+}, {
+    key: '2',
+    name: 'testtestrt',
+    age: 'testtestrtre',
+    address: 10,
+    tags: ['Children'],
+}, {
+    key: '3',
+    name: 'testtestrt',
+    age: 'NewOrganization' ,
+    address: 3,
+    tags: ['Children'],
+}];
+
+const new_data = [{
+    key: '1',
+    name: 'testtestrt',
+    age: 'testtestrtre',
+    address: 5,
+    tags: ['Cats'],
+}, {
+    key: '2',
+    name: 'testtestrt',
+    age: 'testtestrtre',
+    address: 10,
+    tags: ['Children'],
+}, {
+    key: '3',
+    name: 'testtestrt',
+    age: 'neworganization' ,
+    address: 3,
+    tags: ['Children'],
+}, {
+    key: '4',
+    name: 'testtestrt',
+    age: 'neworganization' ,
+    address: 5,
+    tags: ['Children'],
+}];

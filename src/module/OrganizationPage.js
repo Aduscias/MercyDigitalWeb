@@ -32,7 +32,10 @@ class OrganizationArea extends Component {
     getBalance() {
 
         let acc_name =  window.location.hash;
-        ApiLib.getBalance(acc_name)
+        let re = '#';
+
+        let newstr = acc_name.replace(re, '');
+        ApiLib.getBalance(newstr)
             .then(response => {
                 //this.setState ({balance:result})
                 /* console.log(response);
@@ -57,7 +60,7 @@ class OrganizationArea extends Component {
         let newstr = receiver.replace(re, '');
         console.log(this.state.ParamRegister['Comment']);
         console.log(this.state.ParamRegister['Amount']);
-        ApiLib.transfer(sender,newstr,this.state.ParamRegister['Amount'],"DCT",this.state.ParamRegister['Comment'])
+        ApiLib.transfer('decent',newstr,this.state.ParamRegister['Amount'],"DCT",this.state.ParamRegister['Comment'])
             .then(response => {
                 //this.setState ({balance:result})
                 console.log(response)
