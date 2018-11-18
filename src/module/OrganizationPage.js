@@ -19,7 +19,7 @@ class OrganizationArea extends Component {
 
     getBalance() {
         let acc_name = localStorage.getItem('account_name');
-        let result = ApiLib.getBalance(acc_name)
+        let result = ApiLib.getBalance('decent')
             .then(response => {
                 this.setState ({balance:result})
                 console.log(response)

@@ -30,7 +30,7 @@ class Header extends Component {
                     <Col span={8}>How about sharing with those in need? Now in BlockChain</Col>
                     <Col span={8}>
                         <Link to='/Personal'>
-                            <Button type="primary"> Join!</Button>
+                            <Button type="primary">Info</Button>
                         </Link>
                     </Col>
 
