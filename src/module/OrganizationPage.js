@@ -31,7 +31,7 @@ class OrganizationArea extends Component {
                 /* console.log(response);
                  console.log(response.result);
                  console.log(response.result.length);*/
-                if (response && response.result.length !== 0) {
+                if (response && response.result) {
                     //console.log(response.result[0].amount);
                     this.setState({balance: response.result[0].amount})
                 }
@@ -75,7 +75,7 @@ class OrganizationArea extends Component {
     }
 
     handleClickTransactionHistory() {
-         //this.getTransactionHistory();
+         this.getTransactionHistory();
     }
 
     /*sender, receiver, amount, currency, payload*/
