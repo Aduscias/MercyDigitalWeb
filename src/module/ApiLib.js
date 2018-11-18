@@ -151,6 +151,7 @@ export default class ApiLib {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({accountName: accountName})
     };
+    console.log(requestOptions);
     const link = "https://mercy.digital:8443/Mercy/getBalance"
     return fetch(link, requestOptions)
     .then(response => response.json())
