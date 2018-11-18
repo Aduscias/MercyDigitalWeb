@@ -123,24 +123,37 @@ export default class ApiLib {
     return fetch(link, requestOptions)
     .then(response => response.json())
     .then(response => response.result)
-    .then(function(result) {
-      let i;
-      let res = [];
-      for (i=0; i < result.length; i++) {
-        try {
-          /* for tranfers */
-          res.push({description: result[i].description,
-                    memo: result[i].op[1].memo,
-                    amount: result[i].op[1].amount});
-        } catch(e) {
-          /* for other stuff */
-          res.push({description: result[i].description,
-                    memo: result[i].op[1].options.memo_key,
-                    amount: result[i].op[1].fee});
-        }
-      };
-      return(res);
-    })
+    // .then(function(result) {
+    //   let i;
+    //   let res = [];
+    //   for (i=0; i < result.length; i++) {
+    //     try {
+    //       /* for tranfers */
+    //       res.push({description: result[i].description,
+    //                 memo: result[i].op[1], //.memo,
+    //                 amount: result[i].op[1]}); //.amount});
+    //     } catch(e) {
+    //       /* for other stuff */
+    //       res.push({description: result[i].description,
+    //                 memo: result[i].op[1], //.options.memo_key,
+    //                 amount: result[i].op[1]}); //.fee});
+    //     }
+    //   };
+    //   return(res);
+    // })
+    // .then(res => {
+    //   res.forEach(function(item, index, array) {
+    //     try {
+    //       item.memo = item.memo.memo;
+    //       item.amount = item.amount.amount;
+    //     }
+    //     catch(e) {
+    //       item.memo = item.memo.options.memo_key;
+    //       item.amount = item.amount.fee;
+    //     }
+    //     return item
+    //   })
+    // })
   };
 
   static getBalance(accountName) {
