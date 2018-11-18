@@ -265,7 +265,7 @@ class LandingPage extends Component {
                                         <h1>MercyDigital by GreenTears</h1>
                                         <h2>MercyDigital is the charity platform for most transparency and traceability
                                             of donated funds. </h2>
-                                        <img alt="Картинка с чем-то очень важным" src="./media/Landing_image_1.jpg"
+                                        <img alt="Картинка с чем-то очень важным" src="./media/daylight-environment-flora-1230157.jpg"
                                              style={{width: 600}}/>
                                     </Col>
                                     <Col id='auth' span={8}
@@ -310,7 +310,7 @@ class LandingPage extends Component {
                                             easier.</h2>
                                     </Col>
                                     <Col>
-                                        <img alt="Картинка с чем-то очень важным" src="./media/Landing_image_1.jpg"
+                                        <img alt="Картинка с чем-то очень важным" src="./media/blur-businessman-cellphone-943628.jpg"
                                              style={{width: 700}}/>
                                     </Col>
                                 </Row>

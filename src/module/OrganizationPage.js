@@ -20,20 +20,29 @@ class OrganizationArea extends Component {
         this.handleClickTransactionHistory = this.handleClickTransactionHistory(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleClickTransfer = this.handleClickTransfer.bind(this);
-
+        this.SetParToRegister = this.SetParToRegister.bind(this);
     }
-
+    SetParToRegister = (e) => {
+        // console.log(e.target);
+        // console.log(e.target.id);
+        let ParamRegister = {...this.state.ParamRegister};
+        ParamRegister[e.target.id] = e.target.value;
+        this.setState({ParamRegister});
+    };
     getBalance() {
-        let acc_name = localStorage.getItem('account_name');
+
+        let acc_name =  window.location.hash;
         ApiLib.getBalance(acc_name)
             .then(response => {
                 //this.setState ({balance:result})
                 /* console.log(response);
                  console.log(response.result);
                  console.log(response.result.length);*/
-                if (response && response.result.length !== 0) {
+                if (response) {
+                    if (response.result){
+                    if (response.result.length !== 0){
                     //console.log(response.result[0].amount);
-                    this.setState({balance: response.result[0].amount})
+                    this.setState({balance: response.result[0].amount})}}
                 }
             })
     }
@@ -41,9 +50,14 @@ class OrganizationArea extends Component {
 
     transfer(){
 
-        let acc_name = localStorage.getItem('account_name');
-        console.log(this.state.ParamRegister);
-        ApiLib.transfer("decent","myfirstacc","1","DCT","Hello")
+        let sender = localStorage.getItem('account_name');
+        let receiver= window.location.hash;
+        let re = '#';
+
+        let newstr = receiver.replace(re, '');
+        console.log(this.state.ParamRegister['Comment']);
+        console.log(this.state.ParamRegister['Amount']);
+        ApiLib.transfer(sender,newstr,this.state.ParamRegister['Amount'],"DCT",this.state.ParamRegister['Comment'])
             .then(response => {
                 //this.setState ({balance:result})
                 console.log(response)
@@ -153,7 +167,8 @@ class OrganizationArea extends Component {
                 <Row type="flex" style={{marginTop: 25}}>
                     <Col span={24}>
                         <Input placeholder="Amount transfer" style={{width: '20%'}}
-                               onChange={(date, dateString) => this.handleChange(date, dateString, 'Amount')}
+
+                               onChange={this.SetParToRegister} id='Amount'
 
                         />
                         <Select defaultValue="Category transfer"
