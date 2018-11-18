@@ -149,7 +149,7 @@ export default class ApiLib {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({accountName: accountName})
+        body: JSON.stringify({account_name: accountName})
     };
     console.log(requestOptions);
     const link = "https://mercy.digital:8443/Mercy/getBalance"
