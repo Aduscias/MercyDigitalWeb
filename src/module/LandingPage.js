@@ -147,7 +147,7 @@ class LandingPage extends Component {
         let InputForm = '';
 
         const selectAfter = (
-            <Select defaultValue="Choose type Account" style={{width: 80}}
+            <Select defaultValue="Choose type Account" style={{width: '50%' }}
                     onChange={(date, dateString) => this.handleChange(date, dateString, 'type')}>
                 <Option value="org">Organization</Option>
                 <Option value="person">Donor</Option>
@@ -266,10 +266,10 @@ class LandingPage extends Component {
                                         <h2>MercyDigital is the charity platform for most transparency and traceability
                                             of donated funds. </h2>
                                         <img alt="Картинка с чем-то очень важным" src="./media/Landing_image_1.jpg"
-                                             style={{width: 900}}/>
+                                             style={{width: 600}}/>
                                     </Col>
                                     <Col id='auth' span={8}
-                                         style={{position: 'fixed', zIndex: 2, marginLeft: '66%', width: 250}}>
+                                         style={{position: 'fixed', zIndex: 2, marginLeft: '50%', width: '30%'}}>
 
                                         <Input.Group>
                                             <Input
