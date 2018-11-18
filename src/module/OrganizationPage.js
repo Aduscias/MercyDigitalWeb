@@ -52,7 +52,7 @@ class OrganizationArea extends Component {
 
 
     transfer(){
-
+        /*This function is'n work, not production use*/
         let sender = localStorage.getItem('account_name');
         let receiver= window.location.hash;
         let re = '#';

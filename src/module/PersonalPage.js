@@ -12,7 +12,7 @@ class PersonalArea extends Component {
         // Don't call this.setState() here!
         this.state = {
             balance: 0,
-            transaction_history: data,
+            transaction_history: new_data,
 
         };
         this.handleClickGetBalance = this.handleClickGetBalance.bind(this);
@@ -46,8 +46,11 @@ class PersonalArea extends Component {
     }
 
     handleClickUpdateTran(){
+        //alert(123);
+        /*This function is'n work, not production use*/
         this.setState({transaction_history: new_data})
     }
+
     componentDidMount() {
         this.getBalance();
         //console.log(res);
@@ -85,7 +88,7 @@ class PersonalArea extends Component {
                 <Row type="flex" justify="center" align="middle">
                     <Col span={8}>
 
-                        <Button type="primary"  style={{width: 200}}> Update History </Button>
+                        <Button type="primary"  onClick={this.handleClickUpdateTran}  style={{width: 200}}> Update History </Button>
 
                     </Col>
                     <Col span={8}>
@@ -99,7 +102,7 @@ class PersonalArea extends Component {
                     </Col>
                     <Col span={8}>
 
-                        <Button type="primary"  style={{width: 200}} onClick={this.handleClickUpdateTran}> Статистика </Button>
+                        <Button type="primary"  style={{width: 200}} > Статистика </Button>
 
                     </Col>
                 </Row>
@@ -117,7 +120,7 @@ export default PersonalArea;
 
 
 
-const data = [{
+let data = [{
     key: '1',
     name: 'testtestrt',
     age: 'testtestrtre',
@@ -137,7 +140,7 @@ const data = [{
     tags: ['Children'],
 }];
 
-const new_data = [{
+let new_data = [{
     key: '1',
     name: 'testtestrt',
     age: 'testtestrtre',
