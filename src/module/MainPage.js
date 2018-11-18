@@ -74,52 +74,43 @@ class CardOrg extends Component {
             return str;
         }
 
+        function refText(orgsArr, n) {
+            let str = '/Organization#'+orgsArr[n].title;
+            return (<a href={str} > Подробнее</a>);
+        }
+
+        function columnTagText (orgsArr, n) {
+            let text = refText(orgsArr, n);
+            return (
+                <Col span={8} id={orgsArr[n].id}>
+                    <Card title={orgsArr[n].title} extra={text}>
+                        <p>{orgsArr[n].description}</p>
+                    </Card>
+                </Col>
+            );
+        }
 
         function renderThreeOrg(orgsArr) {
 
             if (orgsArr.length === 3) {
                 return (
                     <Row type="flex">
-                        <Col span={8} id={orgsArr[0].id}>
-                            <Card title={orgsArr[0].title} extra={<a href="/Organization#test" > Подробнее</a>}>
-                                <p>{orgsArr[0].description}</p>
-                            </Card>
-                        </Col>
-                        <Col span={8} id={orgsArr[1].id}>
-                            <Card title={orgsArr[1].title} extra={<a href="#">Подробнее</a>}>
-                                <p>{orgsArr[1].description}</p>
-                            </Card>
-                        </Col>
-                        <Col span={8} id={orgsArr[2].id}>
-                            <Card title={orgsArr[2].title} extra={<a href="#">Подробнее</a>}>
-                                <p>{orgsArr[2].description}</p>
-                            </Card>
-                        </Col>
+                        {columnTagText(orgsArr,0)}
+                        {columnTagText(orgsArr,1)}
+                        {columnTagText(orgsArr,2)}
                     </Row>);
             }
             if (orgsArr.length == 2) {
                 return (
                     <Row type="flex">
-                        <Col span={8} id={orgsArr[0].id}>
-                            <Card title={orgsArr[0].title} extra={<a href="#">Подробнее</a>}>
-                                <p>{orgsArr[0].description}</p>
-                            </Card>
-                        </Col>
-                        <Col span={8} id={orgsArr[1].id}>
-                            <Card title={orgsArr[1].title} extra={<a href="#">Подробнее</a>}>
-                                <p>{orgsArr[1].description}</p>
-                            </Card>
-                        </Col>
+                        {columnTagText(orgsArr,0)}
+                        {columnTagText(orgsArr,1)}
                     </Row>);
             }
             if (orgsArr.length == 1) {
                 return (
                     <Row type="flex">
-                        <Col span={8} id={orgsArr[0].id}>
-                            <Card title={orgsArr[0].title} extra={<a href="#">Подробнее</a>}>
-                                <p>{orgsArr[0].description}</p>
-                            </Card>
-                        </Col>
+                        {columnTagText(orgsArr,0)}
                     </Row>);
             }
         }
