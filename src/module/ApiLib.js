@@ -61,7 +61,6 @@ export default class ApiLib {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(props)
     };
-    console.log(requestOptions);
     const link = "https://mercy.digital:8443/Mercy/createAccount";
     return fetch(link, requestOptions)
     // .then(response => console.log(response))
@@ -89,7 +88,7 @@ export default class ApiLib {
       // console.log(result);
       // console.log(result.success ? {account_name: result.account_name,
       //     type: result.type} : null)
-      return(result.success == 'true' ? {account_name: result.account_name,
+      return(result.success === 'true' ? {account_name: result.account_name,
           type: result.type} : null);
     });
   };
@@ -109,7 +108,10 @@ export default class ApiLib {
     };
     const link = "https://mercy.digital:8443/Mercy/Transfer"
     return fetch(link, requestOptions)
-    .then(response => response.json())
+    .then(response => {
+      console.log(response);
+      return response.json()
+    })
 
   };
 
@@ -119,10 +121,11 @@ export default class ApiLib {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(props)
     };
+    console.log(requestOptions);
     const link = "https://mercy.digital:8443/Mercy/getHistory"
     return fetch(link, requestOptions)
     .then(response => response.json())
-    .then(response => response.result)
+    // .then(response => response.result)
     // .then(function(result) {
     //   let i;
     //   let res = [];

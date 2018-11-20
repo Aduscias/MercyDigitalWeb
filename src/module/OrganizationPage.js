@@ -17,7 +17,7 @@ class OrganizationArea extends Component {
         };
         this.handleClickGetBalance = this.handleClickGetBalance.bind(this);
         this.handleClickRefreshReport = this.handleClickRefreshReport.bind(this);
-        this.handleClickTransactionHistory = this.handleClickTransactionHistory(this);
+        this.handleClickTransactionHistory = this.handleClickTransactionHistory.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleClickTransfer = this.handleClickTransfer.bind(this);
 
